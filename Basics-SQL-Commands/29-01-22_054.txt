@@ -1,0 +1,166 @@
+SQL> CREATE TABLE emp
+  2  (
+  3  empno NUMBER,
+  4  empname VARCHAR2(255),
+  5  DOB DATE,
+  6  salary NUMBER,
+  7  designation VARCHAR2(20)
+  8  );
+CREATE TABLE emp
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE TABLE BILL
+  2  (
+  3  
+SQL> CREATE TABLE Orderfood
+  2  (
+  3  Foodtype VARCHAR2(30),
+  4  FoodName VARCHAR@(30),
+  5  );
+FoodName VARCHAR@(30),
+                *
+ERROR at line 4:
+ORA-00906: missing left parenthesis 
+
+
+SQL>  CREATE TABLE Orderfood
+  2    2  (
+  3    3  Foodtype VARCHAR2(30),
+  4    4  FoodName VARCHAR@(30),
+  5  
+SQL> 
+SQL> 
+SQL> CREATE TABLE Orderfood
+  2  (
+  3  Foodtype VARCHAR2(30),
+  4  FoodName VARCHAR2(30),
+  5  );
+)
+*
+ERROR at line 5:
+ORA-00904: : invalid identifier 
+
+
+SQL> CREATE TABLE Orderfood
+  2  (
+  3  Foodtype VARCHAR2(30),
+  4  FoodName VARCHAR2(30)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO Orderfood VALUES("Dairy Food","Ice Cream");
+INSERT INTO Orderfood VALUES("Dairy Food","Ice Cream")
+                                          *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO Orderfood VALUES("DairyFood","IceCream");
+INSERT INTO Orderfood VALUES("DairyFood","IceCream")
+                                         *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO Orderfood (Foodtype, FoodName) VALUES('DairyProduct','IceCream');
+
+1 row created.
+
+SQL> INSERT INTO Orderfood (Foodtype, FoodName) VALUES('Sea food','fish');
+
+1 row created.
+
+SQL> ALTER TABLE Orderfood ADD delivery_type VARCHAR2(30)
+  2  ;
+
+Table altered.
+
+SQL> SELECT * FROM Orderfood;
+
+FOODTYPE                       FOODNAME                                         
+------------------------------ ------------------------------                   
+DELIVERY_TYPE                                                                   
+------------------------------                                                  
+DairyProduct                   IceCream                                         
+                                                                                
+                                                                                
+Sea food                       fish                                             
+                                                                                
+                                                                                
+
+SQL> ALTER TABLE Orderfood DROP (delivery_type);
+
+Table altered.
+
+SQL> SELECT * FROM Orderfood;
+
+FOODTYPE                       FOODNAME                                         
+------------------------------ ------------------------------                   
+DairyProduct                   IceCream                                         
+Sea food                       fish                                             
+
+SQL> ALTER TABLE Orderfood MODIFY(Foodtype VARCHAR2(40));
+
+Table altered.
+
+SQL> DROP TABLE emp;
+
+Table dropped.
+
+SQL> ALTER TABLE Orderfood ADD OrderID NUMBER;
+
+Table altered.
+
+SQL> Insert into Orderfood (OrderID) Values(10);
+
+1 row created.
+
+SQL> Insert into Oderfood (OrderID) Values(20);
+Insert into Oderfood (OrderID) Values(20)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> Insert into Orderfood (OrderID) Values(20);
+
+1 row created.
+
+SQL> select * from Orderfood;
+
+FOODTYPE                                 FOODNAME                               
+---------------------------------------- ------------------------------         
+   ORDERID                                                                      
+----------                                                                      
+DairyProduct                             IceCream                               
+                                                                                
+                                                                                
+Sea food                                 fish                                   
+                                                                                
+                                                                                
+                                                                                
+        10                                                                      
+                                                                                
+
+FOODTYPE                                 FOODNAME                               
+---------------------------------------- ------------------------------         
+   ORDERID                                                                      
+----------                                                                      
+                                                                                
+        20                                                                      
+                                                                                
+
+SQL> Select * from Orderfood where OrderID = 10;
+Select * from Orderfood where OrderID = 10
+*
+ERROR at line 1:
+ORA-03135: connection lost contact 
+Process ID: 13700 
+Session ID: 60 Serial number: 61838 
+
+
+SQL> Spool off
