@@ -1,0 +1,160 @@
+Enter user-name: RA1911032010054/RA1911032010054@52.45.190.47:1521/ORCL
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+SQL> CREATE TABLE BOOKINGS(ID INT, NAME VARCHAR(10), DAYS INT, NIGHTS INT);
+
+Table created.
+
+SQL> CREATE TABLE BILL(ID INT, RATE INT);
+
+Table created.
+
+SQL> INSERT INTO BOOKINGS VALUES('1','TARUN','2','3');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO BOOKINGS VALUES('2','RAM','7','8');
+
+1 row created.
+
+SQL> INSERT INTO BOOKINGS VALUES('3,'LAKSH'6');
+INSERT INTO BOOKINGS VALUES('3,'LAKSH'6')
+                                *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL>
+SQL> INSERT INTO BOOKINGS VALUES('3,'LAKSH','6');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> INSERT INTO BOOKINGS VALUES('3','LAKSH','5','6');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO BOOKINGS VALUES('4','LUV','3','4');
+
+1 row created.
+
+SQL> INSERT INTO BOOKINGS VALUES('5','HUSH','1','2');
+
+1 row created.
+
+SQL> INSERT INTO BILL VALUES('1','200');
+
+1 row created.
+
+SQL> INSERT INTO BILL VALUES('2','300');
+
+1 row created.
+
+SQL> INSERT INTO BILL VALUES('3','350');
+
+1 row created.
+
+SQL> INSERT INTO BILL VALUES('4','100');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO BILL VALUES('5','700');
+
+1 row created.
+
+SQL> SELECT * FROM BOOKINGS;
+
+        ID NAME             DAYS     NIGHTS
+---------- ---------- ---------- ----------
+         1 TARUN               2          3
+         2 RAM                 7          8
+         3 LAKSH               5          6
+         4 LUV                 3          4
+         5 HUSH                1          2
+
+SQL> SELECT * FROM BILL;
+
+        ID       RATE
+---------- ----------
+         1        200
+         2        300
+         3        350
+         4        100
+         5        700
+
+SQL> SELECT * FROM BOOKINGS INNER JOIN BILL ON BOOKINGS.ID=BILL.ID;
+
+        ID NAME             DAYS     NIGHTS         ID       RATE
+---------- ---------- ---------- ---------- ---------- ----------
+         1 TARUN               2          3          1        200
+         2 RAM                 7          8          2        300
+         3 LAKSH               5          6          3        350
+         4 LUV                 3          4          4        100
+         5 HUSH                1          2          5        700
+
+SQL>
+SQL> SELECT * FROM BOOKINGS LEFT JOIN BILL ON BOOKINGS.ID=BILL.ID;
+
+        ID NAME             DAYS     NIGHTS         ID       RATE
+---------- ---------- ---------- ---------- ---------- ----------
+         1 TARUN               2          3          1        200
+         2 RAM                 7          8          2        300
+         3 LAKSH               5          6          3        350
+         4 LUV                 3          4          4        100
+         5 HUSH                1          2          5        700
+
+SQL> SELECT * FROM BOOKINGS CROSS JOIN BILL;
+
+        ID NAME             DAYS     NIGHTS         ID       RATE
+---------- ---------- ---------- ---------- ---------- ----------
+         1 TARUN               2          3          1        200
+         1 TARUN               2          3          2        300
+         1 TARUN               2          3          3        350
+         1 TARUN               2          3          4        100
+         1 TARUN               2          3          5        700
+         2 RAM                 7          8          1        200
+         2 RAM                 7          8          2        300
+         2 RAM                 7          8          3        350
+         2 RAM                 7          8          4        100
+         2 RAM                 7          8          5        700
+         3 LAKSH               5          6          1        200
+
+        ID NAME             DAYS     NIGHTS         ID       RATE
+---------- ---------- ---------- ---------- ---------- ----------
+         3 LAKSH               5          6          2        300
+         3 LAKSH               5          6          3        350
+         3 LAKSH               5          6          4        100
+         3 LAKSH               5          6          5        700
+         4 LUV                 3          4          1        200
+         4 LUV                 3          4          2        300
+         4 LUV                 3          4          3        350
+         4 LUV                 3          4          4        100
+         4 LUV                 3          4          5        700
+         5 HUSH                1          2          1        200
+         5 HUSH                1          2          2        300
+
+        ID NAME             DAYS     NIGHTS         ID       RATE
+---------- ---------- ---------- ---------- ---------- ----------
+         5 HUSH                1          2          3        350
+         5 HUSH                1          2          4        100
+         5 HUSH                1          2          5        700
+
+25 rows selected.
+
+SQL>
+SQL> SELECT * FROM BOOKINGS, BILL WHERE BOOKINGS.ID=BILL.ID;
+
+        ID NAME             DAYS     NIGHTS         ID       RATE
+---------- ---------- ---------- ---------- ---------- ----------
+         1 TARUN               2          3          1        200
+         2 RAM                 7          8          2        300
+         3 LAKSH               5          6          3        350
+         4 LUV                 3          4          4        100
+         5 HUSH                1          2          5        700
+
+SQL>

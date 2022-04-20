@@ -1,0 +1,82 @@
+SQL> select * from Depositor
+  2  ;
+
+CUS_NAME                   ACNO                                                 
+-------------------- ----------                                                 
+Dhruv                        54                                                 
+shubh                        45                                                 
+Piyush                       56                                                 
+
+SQL> Select * from borrower ;
+
+CUS_NAME                 LOANNO                                                 
+-------------------- ----------                                                 
+shubh                      1234                                                 
+Piyush                      182                                                 
+Adil                      19182                                                 
+
+SQL> 
+SQL> (select cus_name from borrower)
+  2  union all (select cus_name from depositor)
+  3  ;
+
+CUS_NAME                                                                        
+--------------------                                                            
+shubh                                                                           
+Piyush                                                                          
+Adil                                                                            
+Dhruv                                                                           
+shubh                                                                           
+Piyush                                                                          
+
+6 rows selected.
+
+SQL> (select cus_name from borrower)
+  2  union (select cus_name from depositor)
+  3  ;
+
+CUS_NAME                                                                        
+--------------------                                                            
+Adil                                                                            
+Dhruv                                                                           
+Piyush                                                                          
+shubh                                                                           
+
+SQL> (select cus_name from borrower)
+  2  Intersect (select cus_name from depositor)
+  3  ;
+
+CUS_NAME                                                                        
+--------------------                                                            
+Piyush                                                                          
+shubh                                                                           
+
+SQL> (select cus_name from borrower)
+  2  minus (select cus_name from depositor)
+  3  ;
+
+CUS_NAME                                                                        
+--------------------                                                            
+Adil                                                                            
+
+SQL> Create Table Depositor(
+  2  cus_name varchar(20),
+  3  acno number);
+Create Table Depositor(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> Insert Into Depositor Values(
+  2  'Anirudh', 193873);
+
+1 row created.
+
+SQL> edit exp7.lst
+
+SQL> spool off exp7.lst
+SP2-0768: Illegal SPOOL command
+Usage: SPOOL { <file> | OFF | OUT }
+where <file> is file_name[.ext] [CRE[ATE]|REP[LACE]|APP[END]]
+SQL> spool off
