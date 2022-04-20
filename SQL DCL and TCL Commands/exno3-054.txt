@@ -1,0 +1,206 @@
+SQL> create table detail(empid NUMBER, empname VARCHAR(255), salary NUMBER);
+
+Table created.
+
+SQL> insert into detail values(1,'dwight',5000);
+
+1 row created.
+
+SQL> insert into detail values(2,'jim;,6000);
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into detail values(2,'jim',6000);
+
+1 row created.
+
+SQL> insert into detail values(3,'pam',5000);
+
+1 row created.
+
+SQL> select * from detail;
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+         1                                                                      
+dwight                                                                          
+      5000                                                                      
+                                                                                
+         2                                                                      
+jim                                                                             
+      6000                                                                      
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+                                                                                
+         3                                                                      
+pam                                                                             
+      5000                                                                      
+                                                                                
+
+SQL> grant select on detail to public;
+
+Grant succeeded.
+
+SQL> revoke select on detail from public;
+
+Revoke succeeded.
+
+SQL> insert into detail values(4,'andy',6000);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from detail;
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+         1                                                                      
+dwight                                                                          
+      5000                                                                      
+                                                                                
+         2                                                                      
+jim                                                                             
+      6000                                                                      
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+                                                                                
+         3                                                                      
+pam                                                                             
+      5000                                                                      
+                                                                                
+         4                                                                      
+andy                                                                            
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+      6000                                                                      
+                                                                                
+
+SQL> delete * from detail where salary=6000;
+delete * from detail where salary=6000
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> delete from detail where salary=6000;
+
+2 rows deleted.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from detail;
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+         1                                                                      
+dwight                                                                          
+      5000                                                                      
+                                                                                
+         2                                                                      
+jim                                                                             
+      6000                                                                      
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+                                                                                
+         3                                                                      
+pam                                                                             
+      5000                                                                      
+                                                                                
+         4                                                                      
+andy                                                                            
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+      6000                                                                      
+                                                                                
+
+SQL> savepoint sp;
+
+Savepoint created.
+
+SQL> rollback to sp;
+
+Rollback complete.
+
+SQL> select * from detail;
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+         1                                                                      
+dwight                                                                          
+      5000                                                                      
+                                                                                
+         2                                                                      
+jim                                                                             
+      6000                                                                      
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+                                                                                
+         3                                                                      
+pam                                                                             
+      5000                                                                      
+                                                                                
+         4                                                                      
+andy                                                                            
+
+     EMPID                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+      6000                                                                      
+                                                                                
+
+SQL> spool off
