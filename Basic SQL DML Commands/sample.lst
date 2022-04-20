@@ -1,0 +1,217 @@
+SQL> CREATE TABLE emp
+  2  (
+  3  empno NUMBER,
+  4  empname VARCHAR2(255),
+  5  DOB DATE,
+  6  salary NUMBER,
+  7  designation VARCHAR2(20)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO emp VALUES(100,"Dhruv",'01.23.2001",500000,"Manager"0;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL>  INSERT INTO emp VALUES(100,"Dhruv",'01.23.2001",500000,"Manager"0);
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL>  INSERT INTO emp VALUES(100,"Dhruv",'01.23.2001",500000,"Manager");
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','4.21.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','4.21.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','04.21.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','04.21.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','4.01.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','4.01.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','04.01.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','04.01.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(101,'Greg','6.20.1994',25000,'Clerk');
+INSERT INTO emp VALUES(101,'Greg','6.20.1994',25000,'Clerk')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(101,'Greg',6.20.1994,25000,'Clerk');
+INSERT INTO emp VALUES(101,'Greg',6.20.1994,25000,'Clerk')
+                                      *
+ERROR at line 1:
+ORA-00917: missing comma 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','4.21.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','4.21.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> 
+SQL> INSERT INTO emp VALUES(101,'Greg','6.20.1994',25000,'Clerk');
+INSERT INTO emp VALUES(101,'Greg','6.20.1994',25000,'Clerk')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','4.21.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','4.21.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> 
+SQL> INSERT INTO emp VALUES(101,'Greg','6.20.1994',25000,'Clerk');
+INSERT INTO emp VALUES(101,'Greg','6.20.1994',25000,'Clerk')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','04.01.1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','04.01.1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','04/01/1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','04/01/1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John','21-1-1994', 50000,'Manager');
+INSERT INTO emp VALUES(100,'John','21-1-1994', 50000,'Manager')
+                                  *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(100,'John',('22-1-1994','DD-MM-YYYY'), 50000,'Manager');
+INSERT INTO emp VALUES(100,'John',('22-1-1994','DD-MM-YYYY'), 50000,'Manager')
+                                              *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> INSERT INTO emp VALUES(100,'John',TO_DATE('22-1-1994','DD-MM-YYYY'), 50000,'Manager');
+
+1 row created.
+
+SQL> INSERT INTO emp VALUES(101,'Grek',TO_DATE('02-22-1995','DD-MM-YYYY'), 25000,'client');
+INSERT INTO emp VALUES(101,'Grek',TO_DATE('02-22-1995','DD-MM-YYYY'), 25000,'client')
+                                          *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES(101,'Grek',TO_DATE('12-2-1995','DD-MM-YYYY'), 25000,'client');
+
+1 row created.
+
+SQL> SELECT * FROM emp;
+
+     EMPNO                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+DOB           SALARY DESIGNATION                                                
+--------- ---------- --------------------                                       
+       100                                                                      
+John                                                                            
+22-JAN-94      50000 Manager                                                    
+                                                                                
+       101                                                                      
+Grek                                                                            
+12-FEB-95      25000 client                                                     
+
+     EMPNO                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+DOB           SALARY DESIGNATION                                                
+--------- ---------- --------------------                                       
+                                                                                
+
+SQL> SELECT empname,salary FROM emp;
+
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+    SALARY                                                                      
+----------                                                                      
+John                                                                            
+     50000                                                                      
+                                                                                
+Grek                                                                            
+     25000                                                                      
+                                                                                
+
+SQL> UPDATE emp SET salary = salary + 1000;
+
+2 rows updated.
+
+SQL> SELECT * FROM emp;
+
+     EMPNO                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+DOB           SALARY DESIGNATION                                                
+--------- ---------- --------------------                                       
+       100                                                                      
+John                                                                            
+22-JAN-94      51000 Manager                                                    
+                                                                                
+       101                                                                      
+Grek                                                                            
+12-FEB-95      26000 client                                                     
+
+     EMPNO                                                                      
+----------                                                                      
+EMPNAME                                                                         
+--------------------------------------------------------------------------------
+DOB           SALARY DESIGNATION                                                
+--------- ---------- --------------------                                       
+                                                                                
+
+SQL> DELETE FROM emp WHERE empno = 101;
+
+1 rows deleted.
+
+SQL> DELETE FROM emp WHERE empno = 100;
+
+1 rows deleted.
+
+
+
+SQL> Spool off
