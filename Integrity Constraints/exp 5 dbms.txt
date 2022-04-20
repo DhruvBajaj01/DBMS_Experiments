@@ -1,0 +1,98 @@
+SQL> create table bookings(sno varchar(20), name varchar(20), days number(10), nights number(10), primary key(sno));
+
+Table created.
+
+SQL> insert into bookings values('100','john',2,3);
+
+1 row created.
+
+SQL> select*from bookings;
+
+SNO                  NAME                       DAYS     NIGHTS
+-------------------- -------------------- ---------- ----------
+100                  john                          2          3
+
+SQL>  insert into bookings values('101','alex',1,2);
+
+1 row created.
+
+SQL>  insert into bookings values('102','smith',3,4);
+
+1 row created.
+
+SQL> select*from bookings;
+
+SNO                  NAME                       DAYS     NIGHTS
+-------------------- -------------------- ---------- ----------
+100                  john                          2          3
+101                  alex                          1          2
+102                  smith                         3          4
+
+SQL> create table bill(sno varchar(20),bill varchar(10),foreign key(sno) references bookings(sno));
+
+Table created.
+
+SQL> desc bill;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                VARCHAR2(20)
+ BILL                                               VARCHAR2(10)
+
+SQL> insert into bookings values('&sno','&name','&days','&nights');
+Enter value for sno: 103
+Enter value for name: mark
+Enter value for days: 4
+Enter value for nights: 5
+old   1: insert into bookings values('&sno','&name','&days','&nights')
+new   1: insert into bookings values('103','mark','4','5')
+
+1 row created.
+
+SQL> select*from bookings;
+
+SNO                  NAME                       DAYS     NIGHTS
+-------------------- -------------------- ---------- ----------
+100                  john                          2          3
+101                  alex                          1          2
+102                  smith                         3          4
+103                  mark                          4          5
+
+SQL> /
+
+SNO                  NAME                       DAYS     NIGHTS
+-------------------- -------------------- ---------- ----------
+100                  john                          2          3
+101                  alex                          1          2
+102                  smith                         3          4
+103                  mark                          4          5
+
+SQL> insert into bookings values(",'james','1','2');
+ERROR:
+ORA-01740: missing double quote in identifier
+
+
+SQL> create table executive(exno varchar(20), name varchar(25) default 'mahesh',bill int check(bill>5000));
+
+Table created.
+
+SQL> insert into executive values('100','ganesh',5600);
+
+1 row created.
+
+SQL> select*from executive;
+
+EXNO                 NAME                            BILL
+-------------------- ------------------------- ----------
+100                  ganesh                          5600
+
+SQL> alter table executive add check (bill>5000);
+
+Table altered.
+
+SQL> select*from executive;
+
+EXNO                 NAME                            BILL
+-------------------- ------------------------- ----------
+100                  ganesh                          5600
+
+SQL>
